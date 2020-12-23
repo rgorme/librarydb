@@ -9,8 +9,8 @@ module.exports.register = async server => {
         config: {
             handler: async request => {
                 try {
-                    var BOOK_ID = 0;
-                    if( typeof request.query.book_id !== 'undefined' && request.query.book_id) {
+                    var BOOK_ID = -999;
+                    if( typeof request.query.book_id !== 'undefined' && request.query.book_id ) {
                         BOOK_ID = request.query.book_id
                     };
                     const db = request.server.plugins.sql.client;

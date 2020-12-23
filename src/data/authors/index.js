@@ -6,11 +6,19 @@ const register = async ( { sql, getConnection } ) => {
    // read in all the .sql files for this folder
    const sqlQueries = await utils.loadSqlQueries( "authors" );
 
-   async function getAuthors() {
+   async function getAuthors( AUTHOR_ID=-999 ) {
         const pool = await getConnection();
         const request = await pool.request();
+        request.input( "AUTHOR_ID", sql.Int, AUTHOR_ID );
         return request.query(sqlQueries.getAuthors);
     };
+
+    async function getBooksForAuthor( AUTHOR_ID ) {
+          const pool = await getConnection();
+          const request = await pool.request();
+          request.input( "AUTHOR_ID", sql.Int, AUTHOR_ID );
+          return request.query(sqlQueries.getBooksForAuthor);
+     };
 
    async function addAuthor(FIRST_NAME, LAST_NAME, NATIONALITY_SHORT, DESCRIPTION ) {
           const pool = await getConnection();
@@ -44,6 +52,7 @@ const register = async ( { sql, getConnection } ) => {
         addAuthor,
         deleteAuthor,
         getAuthors,
+        getBooksForAuthor,
         updateAuthor
    };
 };

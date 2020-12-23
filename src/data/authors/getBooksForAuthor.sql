@@ -2,5 +2,5 @@ DECLARE @DB_AUTHOR_ID int
 
 SET @DB_AUTHOR_ID = @AUTHOR_ID
 
-EXECUTE [dbo].[proc_getAuthors]
+EXECUTE [dbo].[proc_GetBooksForAuthor]
     @DB_AUTHOR_ID

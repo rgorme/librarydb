@@ -5,7 +5,7 @@ const utils = require("../utils");
 const register = async ({ sql, getConnection }) => {
     const sqlQueries = await utils.loadSqlQueries("books");
 
-    async function getBooks( BOOK_ID=0) {
+    async function getBooks( BOOK_ID=-999) {
         const pool = await getConnection();
         const request = await pool.request();
         request.input( "BOOK_ID", sql.Int, BOOK_ID );

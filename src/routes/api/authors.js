@@ -9,16 +9,12 @@ module.exports.register = async server => {
        config: {
            handler: async request => {
                try {
-                   // get the sql client registered as a plugin
+                   var AUTHOR_ID = -999;
+                   if( typeof request.query.author_id !== 'undefined' && request.query.book_id ) {
+                        AUTHOR_ID = request.query.author_id;
+                   };
                    const db = request.server.plugins.sql.client;
-
-                   // TODO: Get the current authenticate user's ID
-                //    const userId = "user1234";
-
-                   // execute the query
-                   const res = await db.authors.getAuthors();
-
-                   // return the recordset object
+                   const res = await db.authors.getAuthors( AUTHOR_ID );
                    return res.recordset;
                } catch ( err ) {
                    console.log( err );
